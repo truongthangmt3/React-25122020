@@ -5,3 +5,4 @@ Giới tính : thứ nhất
 giới tính : nam
 hello
 Long: em sua cua anh
+Long: ok em sua cua anh

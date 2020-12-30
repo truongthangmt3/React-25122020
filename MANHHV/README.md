@@ -1,3 +1,1 @@
-BinladenIS
-Tên Hoàng Mạnh
-Ho va ten: Manh
+Có gì mới cho ngày hôm nay !
