@@ -1,4 +1,3 @@
-# React-25122020
-
 BinladenIS
-10/10/1996
+Tên Hoàng Mạnh
+Ho va ten: Manh
