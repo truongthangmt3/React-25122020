@@ -1,5 +1,5 @@
 Ho Ten: La Hai Nam
 Ngay sinh: 01/11/2000
-Que Quan: Ha Noi
-So Thich: :<
-Gioi Tinh : Nam
+Que Quan: 29
+So Thich :Húp Gái
+Gioi Tinh : Ăn gì tối nay
