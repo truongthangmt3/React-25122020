@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-Tên Hoàng Mạnh
-=======
-# React-25122020
-Ho va ten: Manh
-Editor: Tao da sua cua may
->>>>>>> ab0fd93ce773e29684824735d863ad6daea96df3
+Tên :Hoang Manh
+ngày sinh: khongbiet
+que :eror 404
+Có gì mới cho ngày hôm nay !
