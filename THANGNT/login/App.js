@@ -16,11 +16,16 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 const App = () => {
   return (
     <>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={styles.container}>
         <Image
           style={styles.img_bg}
@@ -32,43 +37,52 @@ const App = () => {
             source={require('./src/assets/ic_app.png')}
           />
         </View>
-        <View style={styles.block_2}>
-          <View style={styles.input}>
-            <Text style={styles.title}>Đăng nhập</Text>
+        
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.block_2}>
+            {/* <View style={styles.block_2}> */}
+            <View style={styles.input}>
+              <Text style={styles.title}>Đăng nhập</Text>
 
-            <View style={styles.user_contain}>
-              <TextInput
-                placeholder={'Tên tài khoản'}
-                style={styles.input_user}></TextInput>
-              <Image
-                style={styles.ic_user}
-                source={require('./src/assets/ic_user.png')}
-              />
-            </View>
-            <View style={styles.user_contain}>
-              <TextInput
-                secureTextEntry={true}
-                placeholder={'Mật khẩu'}
-                style={styles.input_user}></TextInput>
-              <Image
-                style={styles.ic_user}
-                source={require('./src/assets/ic_show_pass.png')}
-              />
-            </View>
-            <Text style={styles.forget_pass}>Quên mật khẩu?</Text>
+              <View style={styles.user_contain}>
+                <TextInput
+                  placeholder={'Tên tài khoản'}
+                  style={styles.input_user}></TextInput>
+                <Image
+                  style={styles.ic_user}
+                  source={require('./src/assets/ic_user.png')}
+                />
+              </View>
+              <View style={styles.user_contain}>
+                <TextInput
+                  secureTextEntry={true}
+                  placeholder={'Mật khẩu'}
+                  style={styles.input_user}></TextInput>
+                <Image
+                  style={styles.ic_user}
+                  source={require('./src/assets/ic_show_pass.png')}
+                />
+              </View>
+              <Text style={styles.forget_pass}>Quên mật khẩu?</Text>
 
-            <TouchableOpacity style={styles.button_login}>
-              <Text style={styles.text_login}>Đăng nhập</Text>
-            </TouchableOpacity>
-            <View style={styles.register}>
-              <Text style={styles.register_prefix}>Bạn chưa có tài khoản?</Text>
-              <TouchableOpacity>
-              <Text style={styles.register_end}>Đăng ký</Text>
+              <TouchableOpacity style={styles.button_login}>
+                <Text style={styles.text_login}>Đăng nhập</Text>
               </TouchableOpacity>
+              <View style={styles.register}>
+                <Text style={styles.register_prefix}>
+                  Bạn chưa có tài khoản?
+                </Text>
+                <TouchableOpacity>
+                  <Text style={styles.register_end}>Đăng ký</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </View>
+            {/* </View> */}
+          </KeyboardAvoidingView>
+        
       </View>
+      </TouchableWithoutFeedback>
     </>
   );
 };
@@ -125,6 +139,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    minHeight : 40,
     alignItems: 'center',
     marginHorizontal: 15,
     minHeight: 500,
@@ -168,16 +183,16 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   register: {
-    flexDirection:"row",
-    marginTop:41,
+    flexDirection: 'row',
+    marginTop: 41,
   },
   register_prefix: {
-    marginTop:2,
+    marginTop: 2,
   },
   register_end: {
     color: '#820B8A',
-    fontSize:16,
-    marginLeft:3,
+    fontSize: 16,
+    marginLeft: 3,
   },
 });
 
