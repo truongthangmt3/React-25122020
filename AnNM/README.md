@@ -4,4 +4,5 @@ Hello World!
 Giới tính : thứ nhất
 giới tính : nam
 hello
-Long: em sua cua anh
+Long: em sua cua anh hello 
+hi everyone
