@@ -8,3 +8,7 @@ function fibonanci(a) {
 
 console.log("The fibonanci of 10 is: %d", fibonanci(10))
 
+function quyhoachdong() {
+
+}
+
