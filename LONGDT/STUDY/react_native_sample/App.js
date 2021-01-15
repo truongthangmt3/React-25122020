@@ -33,10 +33,9 @@ const login_form = () => {
               style={styles.img_lg}
             />
           </View>
-          <KeyboardAvoidingView 
+          <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.container_2}
-          >
+            style={styles.container_2}>
             <View style={styles.container_2}>
               <View style={styles.user_container}>
                 <Text style={styles.title}>Đăng nhập</Text>
@@ -84,11 +83,127 @@ const login_form = () => {
   );
 };
 
-const App = () => {
-  return login_form();
+const product_warranty_form = () => {
+  return (
+    <>
+      <View style={styles.container}>
+        <View style={styles.container_1}>
+          <View style={styles.nav_bar}>
+            <TouchableOpacity style={styles.container_ic_left}>
+              <Image
+                style={styles.img_left}
+                source={require('./src/assets/product_warranty_form/arrow_left.png')}></Image>
+            </TouchableOpacity>
+            <Text style={styles.warranty_text}>Thông tin bảo hành</Text>
+            <TouchableOpacity style={styles.container_save_text}>
+              <Text style={styles.save_text}>Lưu</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.container_2}>
+          <View style={styles.container_warranty_information}>
+            <View style={styles.shadow_line}></View>
+            <View style={styles.list_form_warranty}>
+              <View style={styles.warranty_item}>
+                <View style={styles.prefix}>
+                  <Image
+                    style={styles.img_label}
+                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
+                  <View style={styles.product_code}>
+                    <Text style={styles.text_product}>Mã sản phẩm</Text>
+                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
+                  </View>
+                </View>
+                <View style={styles.center}>
+                  <Text style={styles.text_product}>Tên sản phẩm</Text>
+                  <Text style={styles.text_product_name}>
+                    Tế bào gốc De Medicotem Human White
+                  </Text>
+                </View>
+                <View style={styles.footer}>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
+                    <Text style={styles.text_date}>09/09/2020</Text>
+                  </View>
+                  <View style={styles.line_center}></View>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_period}>Hạn bảo hành</Text>
+                    <Text style={styles.text_date}>09/09/2023</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.warranty_item}>
+                <View style={styles.prefix}>
+                  <Image
+                    style={styles.img_label}
+                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
+                  <View style={styles.product_code}>
+                    <Text style={styles.text_product}>Mã sản phẩm</Text>
+                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
+                  </View>
+                </View>
+                <View style={styles.center}>
+                  <Text style={styles.text_product}>Tên sản phẩm</Text>
+                  <Text style={styles.text_product_name}>
+                    Tế bào gốc De Medicotem Human White
+                  </Text>
+                </View>
+                <View style={styles.footer}>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
+                    <Text style={styles.text_date}>09/09/2020</Text>
+                  </View>
+                  <View style={styles.line_center}></View>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_period}>Hạn bảo hành</Text>
+                    <Text style={styles.text_date}>09/09/2023</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.warranty_item}>
+                <View style={styles.prefix}>
+                  <Image
+                    style={styles.img_label}
+                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
+                  <View style={styles.product_code}>
+                    <Text style={styles.text_product}>Mã sản phẩm</Text>
+                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
+                  </View>
+                </View>
+                <View style={styles.center}>
+                  <Text style={styles.text_product}>Tên sản phẩm</Text>
+                  <Text style={styles.text_product_name}>
+                    Tế bào gốc De Medicotem Human White
+                  </Text>
+                </View>
+                <View style={styles.footer}>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
+                    <Text style={styles.text_date}>09/09/2020</Text>
+                  </View>
+                  <View style={styles.line_center}></View>
+                  <View style={styles.warranty_date}>
+                    <Text style={styles.text_period}>Hạn bảo hành</Text>
+                    <Text style={styles.text_date}>09/09/2023</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </>
+  );
 };
 
-const styles = StyleSheet.create({
+const App = () => {
+  return product_warranty_form();
+};
+
+// NOTE STYLE FOR LOGIN_FORM
+//#region <LOGIN_FORM CSS>
+
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -205,6 +320,166 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#820B8A',
   },
+
+}); */
+//#endregion
+
+// NOTE STYLE FOR PRODUCT_WARRANTY_FORM
+//#region  <PRODUCT_WARRANTY CSS>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  container_1: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+    justifyContent: 'flex-end',
+  },
+
+  nav_bar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    marginHorizontal: 16,
+    marginBottom: 14,
+  },
+
+  container_ic_left: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+
+  img_left: {
+    width: 15,
+    resizeMode: 'contain',
+  },
+
+  warranty_text: {
+    flex: 2,
+    fontSize: 17,
+    textAlign: 'center',
+  },
+
+  container_save_text: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+
+  save_text: {
+    fontSize: 16,
+    color: '#7B2CBF',
+  },
+
+  container_2: {
+    flex: 8,
+    backgroundColor: '#F3F5F9',
+    overflow: 'hidden',
+  },
+
+  container_warranty_information: {
+    backgroundColor: '#F3F5F9',
+  },
+
+  shadow_line: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#D7D9DC',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 7,
+    shadowOpacity: 0.6,
+  },
+
+  list_form_warranty: {
+    flex: 1,
+    marginTop: 14,
+    backgroundColor: 'red',
+    marginHorizontal: 15,
+  },
+
+  warranty_item: {
+    width: '100%',
+    height: 152,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingHorizontal: 15,
+    justifyContent: 'space-between',
+    marginBottom: 12
+  },
+
+  prefix: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+
+  img_label: {
+    width: 36,
+    height: 46,
+    resizeMode: 'contain',
+  },
+
+  product_code: {
+    marginTop: 11,
+    height: 38,
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
+
+  text_product: {
+    fontSize: 12,
+    fontWeight: '300',
+  },
+
+  text_code: {
+    color: '#7B2CBF',
+  },
+
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+
+  text_product_name: {
+    fontSize: 16,
+  },
+
+  footer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  warranty_date: {
+    height: 35,
+    justifyContent: 'space-between',
+  },
+
+  text_active: {
+    fontSize: 12,
+    color: '#3498DB',
+  },
+
+  text_date: {
+    fontSize: 15,
+  },
+
+  line_center: {
+    width: 1,
+    height: 30,
+    backgroundColor: '#BBBBBB',
+  },
+
+  text_period: {
+    color: '#EB2F06',
+  },
 });
+//#endregion
 
 export default App;
