@@ -19,25 +19,41 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native';
 
-const App = () => {
+const item = () => {
+  return (
+    <Image style={styles.item} source={require('./src/assets/ic_user.png')} />
+  );
+};
+
+const renderWarrantyInfo = () => {
   return (
     <>
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
-        <Image
-          style={styles.img_bg}
-          source={require('./src/assets/img_login_bg.png')}
-        />
-        <View style={styles.block_1}>
+      <View style={{flex: 1, backgroundColor: 'green'}}>
+      <Image style={styles.item} source={require('./src/assets/img_item.png')} />
+      </View>
+    </>
+  );
+};
+
+const renderLogin = () => {
+  return (
+    <>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
           <Image
-            style={styles.icon_app}
-            source={require('./src/assets/ic_app.png')}
+            style={styles.img_bg}
+            source={require('./src/assets/img_login_bg.png')}
           />
-        </View>
-        
+          <View style={styles.block_1}>
+            <Image
+              style={styles.icon_app}
+              source={require('./src/assets/ic_app.png')}
+            />
+          </View>
+
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.block_2}>
@@ -80,16 +96,30 @@ const App = () => {
             </View>
             {/* </View> */}
           </KeyboardAvoidingView>
-        
-      </View>
+        </View>
       </TouchableWithoutFeedback>
     </>
   );
 };
 
+const App = () => {
+  return <View style={styles.container}>{renderWarrantyInfo()}</View>;
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'red',
+  },
+  item: {
+    // width : 500,
+    height: 200,
+    // width: '90%',
+    // maxHeight: 200,
+    // aspectRatio: 2,
+    aspectRatio: 2,
+    backgroundColor: 'blue',
+    resizeMode: 'contain',
   },
   img_bg: {
     position: 'absolute',
@@ -139,7 +169,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    minHeight : 40,
+    minHeight: 40,
     alignItems: 'center',
     marginHorizontal: 15,
     minHeight: 500,
