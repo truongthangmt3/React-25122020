@@ -389,10 +389,10 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 2,
     },
-    shadowRadius: 7,
-    shadowOpacity: 0.6,
+    shadowRadius: 5,
+    shadowOpacity: .9,
   },
 
   list_form_warranty: {
