@@ -254,8 +254,8 @@ const product_form = () => {
       <ScrollView>
         <View style={styles.container_product}>
           <View style={styles.product_list}>
-            <View style={styles.list_1}>{product_item(listProduct_1)}</View>
-            <View style={styles.list_2}>{product_item(listProduct_2)}</View>
+            <View style={styles.list}>{product_item(listProduct_1)}</View>
+            <View style={styles.list}>{product_item(listProduct_2)}</View>
           </View>
         </View>
       </ScrollView>
@@ -345,11 +345,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  list_1: {
-    width: 170,
-  },
-
-  list_2: {
+  list: {
     width: 170,
   },
 
