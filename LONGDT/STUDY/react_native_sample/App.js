@@ -254,7 +254,6 @@ const product_form = () => {
       <ScrollView>
         <View style={styles.container_product}>
           <View style={styles.product_list}>
-            {/* <FlatList data={listProduct} renderItem={product_item} numColumns={2}/> */}
             <View style={styles.list_1}>{product_item(listProduct_1)}</View>
             <View style={styles.list_2}>{product_item(listProduct_2)}</View>
           </View>
