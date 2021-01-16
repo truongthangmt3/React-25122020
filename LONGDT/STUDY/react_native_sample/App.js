@@ -1,12 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -16,7 +8,10 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
+
+import Warranty_item from './src/components/Warranty_item';
 
 const login_form = () => {
   return (
@@ -83,6 +78,35 @@ const login_form = () => {
   );
 };
 
+const warranty_item = (code, name, act_date, exp_date) => (
+  <View style={styles.warranty_item}>
+    <View style={styles.prefix}>
+      <Image
+        style={styles.img_label}
+        source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
+      <View style={styles.product_code}>
+        <Text style={styles.text_product}>Mã sản phẩm</Text>
+        <Text style={styles.text_code}>{code}</Text>
+      </View>
+    </View>
+    <View style={styles.center}>
+      <Text style={styles.text_product}>Tên sản phẩm</Text>
+      <Text style={styles.text_product_name}>{name}</Text>
+    </View>
+    <View style={styles.footer}>
+      <View style={styles.warranty_date}>
+        <Text style={styles.text_active}>Ngày kích hoạt</Text>
+        <Text style={styles.text_date}>{act_date}</Text>
+      </View>
+      <View style={styles.line_center}></View>
+      <View style={styles.warranty_date}>
+        <Text style={styles.text_expire}>Hạn bảo hành</Text>
+        <Text style={styles.text_date}>{exp_date}</Text>
+      </View>
+    </View>
+  </View>
+);
+
 const product_warranty_form = () => {
   return (
     <>
@@ -104,90 +128,24 @@ const product_warranty_form = () => {
           <View style={styles.container_warranty_information}>
             <View style={styles.shadow_line}></View>
             <View style={styles.list_form_warranty}>
-              <View style={styles.warranty_item}>
-                <View style={styles.prefix}>
-                  <Image
-                    style={styles.img_label}
-                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
-                  <View style={styles.product_code}>
-                    <Text style={styles.text_product}>Mã sản phẩm</Text>
-                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
-                  </View>
-                </View>
-                <View style={styles.center}>
-                  <Text style={styles.text_product}>Tên sản phẩm</Text>
-                  <Text style={styles.text_product_name}>
-                    Tế bào gốc De Medicotem Human White
-                  </Text>
-                </View>
-                <View style={styles.footer}>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
-                    <Text style={styles.text_date}>09/09/2020</Text>
-                  </View>
-                  <View style={styles.line_center}></View>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_period}>Hạn bảo hành</Text>
-                    <Text style={styles.text_date}>09/09/2023</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.warranty_item}>
-                <View style={styles.prefix}>
-                  <Image
-                    style={styles.img_label}
-                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
-                  <View style={styles.product_code}>
-                    <Text style={styles.text_product}>Mã sản phẩm</Text>
-                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
-                  </View>
-                </View>
-                <View style={styles.center}>
-                  <Text style={styles.text_product}>Tên sản phẩm</Text>
-                  <Text style={styles.text_product_name}>
-                    Tế bào gốc De Medicotem Human White
-                  </Text>
-                </View>
-                <View style={styles.footer}>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
-                    <Text style={styles.text_date}>09/09/2020</Text>
-                  </View>
-                  <View style={styles.line_center}></View>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_period}>Hạn bảo hành</Text>
-                    <Text style={styles.text_date}>09/09/2023</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.warranty_item}>
-                <View style={styles.prefix}>
-                  <Image
-                    style={styles.img_label}
-                    source={require('./src/assets/product_warranty_form/img_label.png')}></Image>
-                  <View style={styles.product_code}>
-                    <Text style={styles.text_product}>Mã sản phẩm</Text>
-                    <Text style={styles.text_code}>DCTV32D8900ES</Text>
-                  </View>
-                </View>
-                <View style={styles.center}>
-                  <Text style={styles.text_product}>Tên sản phẩm</Text>
-                  <Text style={styles.text_product_name}>
-                    Tế bào gốc De Medicotem Human White
-                  </Text>
-                </View>
-                <View style={styles.footer}>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_active}>Ngày kích hoạt</Text>
-                    <Text style={styles.text_date}>09/09/2020</Text>
-                  </View>
-                  <View style={styles.line_center}></View>
-                  <View style={styles.warranty_date}>
-                    <Text style={styles.text_period}>Hạn bảo hành</Text>
-                    <Text style={styles.text_date}>09/09/2023</Text>
-                  </View>
-                </View>
-              </View>
+              {warranty_item(
+                '1203143024',
+                'React Native Course: BEGINNER TO PRO',
+                '15/01/2021',
+                '15/05/2021',
+              )}
+              <Warranty_item
+                code="5403143024"
+                name="Flutter Course: NOOB TO PRO"
+                act_date="30/01/2022"
+                exp_date="15/05/2022"
+              />
+              <Warranty_item
+                code="3249242934"
+                name="Java Course"
+                act_date="20/2/2022"
+                exp_date="15/05/2023"
+              />
             </View>
           </View>
         </View>
@@ -196,9 +154,268 @@ const product_warranty_form = () => {
   );
 };
 
-const App = () => {
-  return product_warranty_form();
+const listTab = [
+  {
+    item: 'Tất cả',
+  },
+  {
+    item: 'Tế bào gốc',
+  },
+  {
+    item: 'Serum',
+  },
+  {
+    item: 'Khác',
+  },
+];
+
+const tab_item = () => {
+  const [item, setItem] = useState('Tế bào gốc');
+  const tabChange = (item) => setItem(item);
+
+  return listTab.map((e) => (
+    <TouchableOpacity
+      style={[
+        styles.contain_text_tab,
+        item == e.item && styles.contain_text_tab_active,
+      ]}
+      onPress={() => tabChange(e.item)}>
+      <Text style={[styles.text_tab, item == e.item && {color: '#820B8A'}]}>
+        {e.item}
+      </Text>
+    </TouchableOpacity>
+  ));
 };
+
+const listProduct_1 = [
+  {
+    image: require('./src/assets/product_form/product_1.png'),
+    name: 'De Medicotem Human ',
+    price: '1.100.000 đ',
+  },
+  {
+    image: require('./src/assets/product_form/product_3.png'),
+    name: 'Serum The Ordinary 30ml',
+    price: '390.000 đ',
+  },
+  {
+    image: require('./src/assets/product_form/product_5.png'),
+    name: 'De Medicotem Human ',
+    price: '705.000 đ',
+  },
+];
+
+const listProduct_2 = [
+  {
+    image: require('./src/assets/product_form/product_2.png'),
+    name: 'De Medicotem Human ',
+    price: '1.350.000 đ',
+  },
+  {
+    image: require('./src/assets/product_form/product_7.png'),
+    name: 'Neutrogena Bright Boost Serum',
+    price: '850.000 đ',
+  },
+  {
+    image: require('./src/assets/product_form/product_6.png'),
+    name: 'Serum Nhụy Hoa Nghệ Tây Genie',
+    price: '250.000 đ',
+  },
+];
+
+const product_item = (list) => {
+  return list.map((e) => (
+    <View style={styles.product_item}>
+      <Image style={styles.img_product} source={e.image} />
+      <Text style={styles.product_name}>{e.name}</Text>
+      <Text style={styles.product_price}>{e.price}</Text>
+    </View>
+  ));
+};
+
+const nav_bar = (item) => {
+  return (
+    <TouchableOpacity style={styles.ic_contain}>
+      <Image style={styles.ic_product} source={item.image} />
+      <Text
+        style={[styles.ic_text, item.text == 'Sản phẩm' && {color: '#820B8A'}]}>
+        {item.text}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+const product_form = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.container_tab}>
+        <View style={styles.tab_bar}>{tab_item()}</View>
+      </View>
+      <ScrollView>
+        <View style={styles.container_product}>
+          <View style={styles.product_list}>
+            {/* <FlatList data={listProduct} renderItem={product_item} numColumns={2}/> */}
+            <View style={styles.list_1}>{product_item(listProduct_1)}</View>
+            <View style={styles.list_2}>{product_item(listProduct_2)}</View>
+          </View>
+        </View>
+      </ScrollView>
+      <View style={styles.container_control_bar}>
+        {nav_bar({
+          text: 'Trang chủ',
+          image: require('./src/assets/product_form/ic_home.png'),
+        })}
+        {nav_bar({
+          text: 'Sản phẩm',
+          image: require('./src/assets/product_form/ic_product_fill.png'),
+        })}
+        <Image style={styles.img_qr} source={require('./src/assets/product_form/img_qr.png')}/>
+        {nav_bar({
+          text: 'Thông báo',
+          image: require('./src/assets/product_form/ic_notify.png'),
+        })}
+        {nav_bar({
+          text: 'Tài khoản',
+          image: require('./src/assets/product_form/ic_acc.png'),
+        })}
+      </View>
+    </View>
+  );
+};
+
+const App = () => {
+  return product_form();
+};
+
+// NOTE STYLE FOR PRODUCT_FORM
+//#region <PRODUCT_FORM CSS>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  container_tab: {
+    width: '100%',
+    height: 85,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    justifyContent: 'flex-end',
+  },
+
+  tab_bar: {
+    width: '100%',
+    height: 32,
+    backgroundColor: '#F3F5F9',
+    borderRadius: 16,
+    marginBottom: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    paddingHorizontal: 2,
+  },
+
+  contain_text_tab: {
+    flex: 1,
+    height: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 14,
+  },
+
+  contain_text_tab_active: {
+    backgroundColor: 'white',
+  },
+
+  text_tab: {
+    fontSize: 14,
+    color: '#666666',
+  },
+
+  container_product: {
+    flex: 1,
+    paddingTop: 16,
+    paddingHorizontal: 15,
+    backgroundColor: '#F3F5F9',
+  },
+
+  product_list: {
+    flex: 1,
+    height: '100%',
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+  },
+
+  list_1: {
+    width: 170,
+  },
+
+  list_2: {
+    width: 170,
+  },
+
+  product_item: {
+    backgroundColor: 'white',
+    marginBottom: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+
+  img_product: {
+    width: 164,
+    resizeMode: 'contain',
+  },
+
+  product_name: {
+    fontSize: 15,
+    marginTop: 6,
+    height: 38,
+    marginHorizontal: 5,
+    alignSelf: 'flex-start',
+  },
+
+  product_price: {
+    fontSize: 14,
+    color: '#EB2F06',
+    marginTop: 10,
+    marginBottom: 8,
+    alignSelf: 'flex-start',
+    marginLeft: 5,
+  },
+
+  container_control_bar: {
+    position: 'absolute',
+    width: '100%',
+    height: 80,
+    backgroundColor: 'white',
+    bottom: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+
+  ic_contain: {
+    width: 75,
+    height: 47,
+    alignItems: 'center',
+    marginTop: 6,
+  },
+
+  ic_product: {
+    flex: 1,
+    width: 75,
+    resizeMode: 'contain',
+  },
+
+  ic_text: {
+    fontSize: 12,
+    color: '#A9BCC5',
+  },
+
+  img_qr: {
+    bottom: 18
+  }
+});
+//#endregion
 
 // NOTE STYLE FOR LOGIN_FORM
 //#region <LOGIN_FORM CSS>
@@ -326,7 +543,7 @@ const App = () => {
 
 // NOTE STYLE FOR PRODUCT_WARRANTY_FORM
 //#region  <PRODUCT_WARRANTY CSS>
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -392,13 +609,12 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowRadius: 5,
-    shadowOpacity: .9,
+    shadowOpacity: 0.9,
   },
 
   list_form_warranty: {
     flex: 1,
     marginTop: 14,
-    backgroundColor: 'red',
     marginHorizontal: 15,
   },
 
@@ -409,7 +625,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     justifyContent: 'space-between',
-    marginBottom: 12
+    marginBottom: 12,
   },
 
   prefix: {
@@ -476,10 +692,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#BBBBBB',
   },
 
-  text_period: {
+  text_expire: {
     color: '#EB2F06',
   },
-});
+}); */
 //#endregion
 
 export default App;
+
+/* const sample_react_hook = () => {
+  const [selected, setSelected] = useState(list_img.img_1)
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.rounded_test}></View>
+      <Image
+        source={selected}
+      />
+      <TouchableOpacity onPress={()=>{
+        setSelected(selected == list_img.img_1 ? list_img.img_2 : list_img.img_1)
+      }}><Text>Change Image</Text></TouchableOpacity>
+    </View>
+  )
+} */
