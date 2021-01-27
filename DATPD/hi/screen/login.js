@@ -24,6 +24,14 @@ export default class Login extends Component {
           style={styles.background}
         />
 
+        <View style={styles.block_logo}>
+
+        </View>
+
+        <KeyboardAvoidingView style={styles.block_login}>
+          
+        </KeyboardAvoidingView>
+
       </View>
     );
   }
@@ -37,9 +45,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  /**
+   * BACKGROUND BEHIND
+   */
   background: {
+    position: 'absolute', top: -100,
     resizeMode: 'contain',
     width: 500, height: 500
+  },
+
+  /**
+   * BLOCK_LOGO
+   */
+  block_logo: {
+    flex: 1, width: '100%',
+    backgroundColor: 'red'
+  },
+
+  /**
+   *  BLOCK_LOGIN
+   */
+  block_login: {
+    flex: 2, width: '100%',
+    backgroundColor: 'green'
   }
   
 });
