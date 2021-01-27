@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,25 +19,44 @@ import {
   KeyboardAvoidingView,
   Platform,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from 'react-native';
 
-const App = () => {
+const item = () => {
+  return (
+    <Image style={styles.item} source={require('./src/assets/ic_user.png')} />
+  );
+};
+
+const renderWarrantyInfo = () => {
   return (
     <>
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.container}>
+      <View style={{flex: 1, backgroundColor: 'green'}}>
         <Image
-          style={styles.img_bg}
-          source={require('./src/assets/img_login_bg.png')}
+          style={styles.item}
+          source={require('./src/assets/img_item.png')}
         />
-        <View style={styles.block_1}>
+      </View>
+    </>
+  );
+};
+
+const renderLogin = () => {
+  return (
+    <>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
           <Image
-            style={styles.icon_app}
-            source={require('./src/assets/ic_app.png')}
+            style={styles.img_bg}
+            source={require('./src/assets/img_login_bg.png')}
           />
-        </View>
-        
+          <View style={styles.block_1}>
+            <Image
+              style={styles.icon_app}
+              source={require('./src/assets/ic_app.png')}
+            />
+          </View>
+
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.block_2}>
@@ -80,16 +99,80 @@ const App = () => {
             </View>
             {/* </View> */}
           </KeyboardAvoidingView>
-        
-      </View>
+        </View>
       </TouchableWithoutFeedback>
     </>
+  );
+};
+
+const App = () => {
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        'http://vjmagroup.com/api/Service/GetHomeScreen',
+      );
+      const jsonResponse = await response.json();
+      setData(jsonResponse.data);
+      console.log(jsonResponse);
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      setError(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log('Đã chào đời');
+    getData();
+    // sẽ bị callback hell
+    // fetch('http://vjmagroup.com/api/Service/GetHomeScreen')
+    //   .then((response) => {
+    //     response
+    //       .json()
+    //       .then((jsonResponse) => {
+    //           console.log(jsonResponse)
+    //       })
+    //       .catch((error) => {});
+    //   })
+    //   .catch((error) => {});
+  }, []);
+
+  if (isLoading) {
+    return <Text>Vui lòng đợi</Text>;
+  }
+
+  if (error) {
+    return <Text>Đã có lỗi xảy ra</Text>;
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text>{JSON.stringify(data.listProduct[0].name)}</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  item: {
+    // width : 500,
+    height: 200,
+    // width: '90%',
+    // maxHeight: 200,
+    // aspectRatio: 2,
+    aspectRatio: 2,
+    backgroundColor: 'blue',
+    resizeMode: 'contain',
   },
   img_bg: {
     position: 'absolute',
@@ -139,7 +222,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    minHeight : 40,
+    minHeight: 40,
     alignItems: 'center',
     marginHorizontal: 15,
     minHeight: 500,
