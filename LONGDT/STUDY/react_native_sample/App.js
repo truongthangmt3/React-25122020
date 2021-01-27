@@ -169,16 +169,18 @@ const listTab = [
   },
 ];
 
-const tabItem = () => {
-  const [selectedItem, setSlectedItem] = useState('Tế bào gốc');
-  const tabChange = (item) => setSlectedItem(item);
+const tab_item = () => {
+  const [item, setItem] = useState('Tế bào gốc');
+  const tabChange = (item) => setItem(item);
 
   return listTab.map((e) => (
     <TouchableOpacity
-      style={[styles.contain_text_tab,styles.contain_text_tab_active && (selectedItem == e.item)]}
+      style={[
+        styles.contain_text_tab,
+        item == e.item && styles.contain_text_tab_active,
+      ]}
       onPress={() => tabChange(e.item)}>
-      <Text
-        style={[styles.text_tab, selectedItem == e.item && {color: '#820B8A'}]}>
+      <Text style={[styles.text_tab, item == e.item && {color: '#820B8A'}]}>
         {e.item}
       </Text>
     </TouchableOpacity>
@@ -247,7 +249,7 @@ const product_form = () => {
   return (
     <View style={styles.container}>
       <View style={styles.container_tab}>
-        <View style={styles.tab_bar}>{tabItem()}</View>
+        <View style={styles.tab_bar}>{tab_item()}</View>
       </View>
       <ScrollView>
         <View style={styles.container_product}>
@@ -266,10 +268,7 @@ const product_form = () => {
           text: 'Sản phẩm',
           image: require('./src/assets/product_form/ic_product_fill.png'),
         })}
-        <Image
-          style={styles.img_qr}
-          source={require('./src/assets/product_form/img_qr.png')}
-        />
+        <Image style={styles.img_qr} source={require('./src/assets/product_form/img_qr.png')}/>
         {nav_bar({
           text: 'Thông báo',
           image: require('./src/assets/product_form/ic_notify.png'),
@@ -408,8 +407,8 @@ const styles = StyleSheet.create({
   },
 
   img_qr: {
-    bottom: 18,
-  },
+    bottom: 18
+  }
 });
 //#endregion
 
