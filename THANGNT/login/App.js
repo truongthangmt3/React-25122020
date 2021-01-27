@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -32,7 +32,10 @@ const renderWarrantyInfo = () => {
   return (
     <>
       <View style={{flex: 1, backgroundColor: 'green'}}>
-      <Image style={styles.item} source={require('./src/assets/img_item.png')} />
+        <Image
+          style={styles.item}
+          source={require('./src/assets/img_item.png')}
+        />
       </View>
     </>
   );
@@ -103,13 +106,63 @@ const renderLogin = () => {
 };
 
 const App = () => {
-  return <View style={styles.container}>{renderWarrantyInfo()}</View>;
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const getData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        'http://vjmagroup.com/api/Service/GetHomeScreen',
+      );
+      const jsonResponse = await response.json();
+      setData(jsonResponse.data);
+      console.log(jsonResponse);
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+      setError(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log('Đã chào đời');
+    getData();
+    // sẽ bị callback hell
+    // fetch('http://vjmagroup.com/api/Service/GetHomeScreen')
+    //   .then((response) => {
+    //     response
+    //       .json()
+    //       .then((jsonResponse) => {
+    //           console.log(jsonResponse)
+    //       })
+    //       .catch((error) => {});
+    //   })
+    //   .catch((error) => {});
+  }, []);
+
+  if (isLoading) {
+    return <Text>Vui lòng đợi</Text>;
+  }
+
+  if (error) {
+    return <Text>Đã có lỗi xảy ra</Text>;
+  }
+
+  return (
+    <View style={styles.container}>
+      <Text>{JSON.stringify(data.listProduct[0].name)}</Text>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   item: {
     // width : 500,
