@@ -74,9 +74,9 @@ const HomeForm = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const imgResult = (res) => {
+  const formatImgResult = res => {
     let listImgs = [];
-    res.map((e) => listImgs.push(e.urlImage));
+    res.map(e => listImgs.push(e.urlImage));
 
     setData(listImgs.reverse());
   };
@@ -88,7 +88,7 @@ const HomeForm = () => {
         'http://vjmagroup.com/api/Service/GetHomeScreen',
       );
       const jsonResponse = await response.json();
-      imgResult(jsonResponse.data.listBanner);
+      formatImgResult(jsonResponse.data.listBanner);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
