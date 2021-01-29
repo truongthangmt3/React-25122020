@@ -6,6 +6,8 @@
  * @flow strict-local
  */
 
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
@@ -21,6 +23,11 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {SliderBox} from 'react-native-image-slider-box';
+import FastImage from 'react-native-fast-image';
+import ProductDetailScreen from './src/screens/product/ProductDetailScreen';
+import ProductScreen from './src/screens/product/ProductScreen';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const item = () => {
   return (
@@ -114,7 +121,7 @@ const App = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        'http://vjmagroup.com/api/Service/GetHomeScreen',
+        'http://app.vjmagroup.com/api/Service/GetHomeScreen',
       );
       const jsonResponse = await response.json();
       setData(jsonResponse.data);
@@ -150,17 +157,58 @@ const App = () => {
     return <Text>Đã có lỗi xảy ra</Text>;
   }
 
-  return (
-    <View style={styles.container}>
-      <Text>{JSON.stringify(data.listProduct[0].name)}</Text>
-    </View>
-  );
+  const renderBanner = () => {
+    return (
+      <View style={styles.container}>
+        <FastImage
+          style={{
+            width: 100,
+            height: 100,
+          }}
+          source={require('./src/assets/ic_app.png')}
+        />
+        <SafeAreaView>
+          <View
+            style={{
+              background: 'red',
+              width: '90%',
+              height: 200,
+            }}>
+            <SliderBox
+              ImageComponent={FastImage}
+              autoplay={true}
+              onCurrentImagePressed={(index) => {
+                alert(index);
+              }}
+              ImageComponentStyle={{
+                borderRadius: 10,
+              }}
+              images={listBannerImages}
+            />
+          </View>
+        </SafeAreaView>
+      </View>
+    );
+  };
+
+  const listBannerImages = data.listNews.map((item) => item.urlImage);
+
+
+  const ProductStack = createStackNavigator();
+  
+
+  return <NavigationContainer>
+     <ProductStack.Navigator>
+        <ProductStack.Screen name="PRODUCT" component={ProductScreen}/>
+        <ProductStack.Screen name="PRODUCT_DETAIL" component={ProductDetailScreen} />
+      </ProductStack.Navigator>
+    </NavigationContainer>;
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
