@@ -12,6 +12,7 @@ import Login from './screen/login.js'
 import Product from './screen/product.js'
 import MenuProduct from './screen/MenuProduct.js'
 import Tempt from './screen/Tempt.js'
+import Banner from './screen/Banner.js'
 
 
 const App = () => {

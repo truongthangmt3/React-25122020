@@ -11,7 +11,7 @@ class Element extends Component {
         <View style={styleElement.block}>
           <View style={styleElement.block1_left}>
             <Image 
-              source={require('../src/image/screen.jpg')}
+              source={require('../src/image/login/screen.jpg')}
               style={styleElement.block1_left_img}
             />
           </View>
