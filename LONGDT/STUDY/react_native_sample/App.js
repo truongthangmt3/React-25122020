@@ -40,21 +40,6 @@ const Slider = (props) => {
   );
 };
 
-const hotProducts = [
-  {
-    "key": 1,
-    "img": require('./src/assets/home_form/hot_1.png') 
-  },
-  {
-    "key": 2,
-    "img": require('./src/assets/home_form/hot_2.png') 
-  },
-  {
-    "key": 3,
-    "img": require('./src/assets/home_form/hot_3.png') 
-  }
-]
-
 const Title = (props) => {
   return (
     <View style={styles.title_bar}>
@@ -85,12 +70,13 @@ const HomeForm = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        'http://vjmagroup.com/api/Service/GetHomeScreen',
+        'http://app.vjmagroup.com/api/Service/GetHomeScreen',
       );
       const jsonResponse = await response.json();
-      formatImgResult(jsonResponse.data.listBanner);
+      formatImgResult(jsonResponse.data.listNews);
       setIsLoading(false);
     } catch (error) {
+      console.log(error)
       setIsLoading(false);
       setError(error);
     }
@@ -126,14 +112,14 @@ const HomeForm = () => {
         <Text style={styles.user_title}>Xin chào, Long</Text>
         <Slider list={data} />
         <Title text="Sản phẩm" />
-        <FlatList 
-          data={hotProducts}
+        {/* <FlatList 
+          data={}
           renderItem={({item, index}) => {
             return (
               <Image source={item.img}/>
             )
           }}
-        />
+        /> */}
       </View>
     </View>
   );
