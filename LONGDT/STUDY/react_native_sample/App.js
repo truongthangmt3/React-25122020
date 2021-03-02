@@ -1,6 +1,7 @@
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   Image,
@@ -8,312 +9,40 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  ScrollView,
-  FlatList
 } from 'react-native';
-import {SliderBox} from 'react-native-image-slider-box';
-import Warranty_item from './src/components/Warranty_item';
-
-const Slider = (props) => {
-  return (
-    <View style={{height: 130}}>
-      <SliderBox
-        parentWidth={390}
-        sliderBoxHeight={130}
-        ImageComponentStyle={{borderRadius: 8, width: '100%'}}
-        disableOnPress={true}
-        images={props.list}
-        resizeMethod={'resize'}
-        resizeMode={'cover'}
-        paginationBoxVerticalPadding={3}
-        dotColor="#7B2CBF"
-        inactiveDotColor="#BBBBBB"
-        dotStyle={{
-          width: 8,
-          height: 2,
-          marginHorizontal: -5,
-        }}
-        autoplay
-        circleLoop
-      />
-    </View>
-  );
-};
-
-const Title = (props) => {
-  return (
-    <View style={styles.title_bar}>
-      <View style={styles.contain_title}>
-        <Text style={styles.title_text}>{props.text}</Text>
-        <TouchableOpacity>
-          <Text style={styles.more_text}>Xem thêm</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.line}></View>
-    </View>
-  );
-};
-
-const HomeForm = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const formatImgResult = res => {
-    let listImgs = [];
-    res.map(e => listImgs.push(e.urlImage));
-
-    setData(listImgs.reverse());
-  };
-
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        'http://app.vjmagroup.com/api/Service/GetHomeScreen',
-      );
-      const jsonResponse = await response.json();
-      formatImgResult(jsonResponse.data.listNews);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error)
-      setIsLoading(false);
-      setError(error);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View>
-        <Text>data loading</Text>
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View>
-        <Text>error</Text>
-      </View>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <Image
-        style={styles.img_top}
-        source={require('./src/assets/home_form/bg_top.png')}
-      />
-      <View style={styles.center}>
-        <Text style={styles.user_title}>Xin chào, Long</Text>
-        <Slider list={data} />
-        <Title text="Sản phẩm" />
-        {/* <FlatList 
-          data={}
-          renderItem={({item, index}) => {
-            return (
-              <Image source={item.img}/>
-            )
-          }}
-        /> */}
-      </View>
-    </View>
-  );
-};
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ProductStackComponent from './src/screens/product/ProductStackComponent';
+import HomeScreen from './src/screens/home/HomeScreen';
+import HomeIcon from './src/components/tabBarComponent/HomeIcon';
+import ProductIcon from './src/components/tabBarComponent/ProductIcon';
 
 const App = () => {
-  return HomeForm();
+  const Tab = createBottomTabNavigator();
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBarOptions={{
+          labelStyle: {fontSize: 12},
+          activeTintColor: '#820B8A',
+          inactiveTintColor: '#A9BCC5',
+        }}>
+        <Tab.Screen
+          name="Trang chủ"
+          component={HomeScreen}
+          options={{tabBarIcon: ({color}) => <HomeIcon color={color} />}}
+        />
+        <Tab.Screen
+          name="Sản phẩm"
+          component={ProductStackComponent}
+          options={{tabBarIcon: ({color}) => <ProductIcon color={color} />}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  img_top: {
-    position: 'absolute',
-    width: '100%',
-    height: 140,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-
-  center: {
-    width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-
-  user_title: {
-    color: 'white',
-    marginBottom: 11,
-    fontSize: 16,
-    marginTop: 45,
-  },
-
-  title_bar: {
-    width: '100%',
-    marginTop: 20,
-  },
-
-  contain_title: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-
-  title_text: {
-    fontSize: 17,
-  },
-
-  more_text: {
-    color: '#7B2CBF',
-    fontSize: 14,
-  },
-
-  line: {
-    width: 29,
-    height: 4,
-    backgroundColor: '#7B2CBF',
-    borderRadius: 20,
-    marginTop: 6
-  },
-});
-
 // NOTE STYLE FOR PRODUCT_FORM
-//#region <PRODUCT_FORM CSS>
-/* const styles = StyleSheet.create({
-  text_container: {
-    flex: 1
-  },
-
-  container: {
-    flex: 1,
-  },
-
-  container_tab: {
-    width: '100%',
-    height: 85,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    justifyContent: 'flex-end',
-  },
-
-  tab_bar: {
-    width: '100%',
-    height: 32,
-    backgroundColor: '#F3F5F9',
-    borderRadius: 16,
-    marginBottom: 6,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingHorizontal: 2,
-  },
-
-  contain_text_tab: {
-    flex: 1,
-    height: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 14,
-  },
-
-  contain_text_tab_active: {
-    backgroundColor: 'white',
-  },
-
-  text_tab: {
-    fontSize: 14,
-    color: '#666666',
-  },
-
-  container_product: {
-    flex: 1,
-    paddingTop: 16,
-    paddingHorizontal: 15,
-    backgroundColor: '#F3F5F9',
-  },
-
-  product_list: {
-    flex: 1,
-    height: '100%',
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-  },
-
-  list: {
-    width: 170,
-  },
-
-  product_item: {
-    backgroundColor: 'white',
-    marginBottom: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-
-  img_product: {
-    width: 164,
-    resizeMode: 'contain',
-  },
-
-  product_name: {
-    fontSize: 15,
-    marginTop: 6,
-    height: 38,
-    marginHorizontal: 5,
-    alignSelf: 'flex-start',
-  },
-
-  product_price: {
-    fontSize: 14,
-    color: '#EB2F06',
-    marginTop: 10,
-    marginBottom: 8,
-    alignSelf: 'flex-start',
-    marginLeft: 5,
-  },
-
-  container_control_bar: {
-    position: 'absolute',
-    width: '100%',
-    height: 80,
-    backgroundColor: 'white',
-    bottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-
-  ic_contain: {
-    width: 75,
-    height: 47,
-    alignItems: 'center',
-    marginTop: 6,
-  },
-
-  ic_product: {
-    flex: 1,
-    width: 75,
-    resizeMode: 'contain',
-  },
-
-  ic_text: {
-    fontSize: 12,
-    color: '#A9BCC5',
-  },
-
-  img_qr: {
-    bottom: 18,
-  },
-}); */
-//#endregion
 
 // NOTE STYLE FOR LOGIN_FORM
 //#region <LOGIN_FORM CSS>
@@ -736,136 +465,5 @@ const product_warranty_form = () => {
         </View>
       </View>
     </>
-  );
-};
-
-const listTab = [
-  {
-    item: 'Tất cả',
-  },
-  {
-    item: 'Tế bào gốc',
-  },
-  {
-    item: 'Serum',
-  },
-  {
-    item: 'Khác',
-  },
-];
-
-const tab_item = () => {
-  const [item, setItem] = useState('Tế bào gốc');
-  const tabChange = (item) => setItem(item);
-
-  return listTab.map((e) => (
-    <TouchableOpacity
-      style={[
-        styles.contain_text_tab,
-        item == e.item && styles.contain_text_tab_active,
-      ]}
-      onPress={() => tabChange(e.item)}>
-      <Text style={[styles.text_tab, item == e.item && {color: '#820B8A'}]}>
-        {e.item}
-      </Text>
-    </TouchableOpacity>
-  ));
-};
-
-const listProduct_1 = [
-  {
-    image: require('./src/assets/product_form/product_1.png'),
-    name: 'De Medicotem Human ',
-    price: '1.100.000 đ',
-  },
-  {
-    image: require('./src/assets/product_form/product_3.png'),
-    name: 'Serum The Ordinary 30ml',
-    price: '390.000 đ',
-  },
-  {
-    image: require('./src/assets/product_form/product_5.png'),
-    name: 'De Medicotem Human ',
-    price: '705.000 đ',
-  },
-];
-
-const listProduct_2 = [
-  {
-    image: require('./src/assets/product_form/product_2.png'),
-    name: 'De Medicotem Human ',
-    price: '1.350.000 đ',
-  },
-  {
-    image: require('./src/assets/product_form/product_7.png'),
-    name: 'Neutrogena Bright Boost Serum',
-    price: '850.000 đ',
-  },
-  {
-    image: require('./src/assets/product_form/product_6.png'),
-    name: 'Serum Nhụy Hoa Nghệ Tây Genie',
-    price: '250.000 đ',
-  },
-];
-
-const product_item = (list) => {
-  return list.map((e) => (
-    <View style={styles.product_item}>
-      <Image style={styles.img_product} source={e.image} />
-      <Text style={styles.product_name}>{e.name}</Text>
-      <Text style={styles.product_price}>{e.price}</Text>
-    </View>
-  ));
-};
-
-const nav_bar = (item) => {
-  return (
-    <TouchableOpacity style={styles.ic_contain}>
-      <Image style={styles.ic_product} source={item.image} />
-      <Text
-        style={[styles.ic_text, item.text == 'Sản phẩm' && {color: '#820B8A'}]}>
-        {item.text}
-      </Text>
-    </TouchableOpacity>
-  );
-};
-
-const product_form = () => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.container_tab}>
-        <View style={styles.tab_bar}>{tab_item()}</View>
-      </View>
-      <ScrollView>
-        <View style={styles.container_product}>
-          <View style={styles.product_list}>
-            <View style={styles.list}>{product_item(listProduct_1)}</View>
-            <View style={styles.list}>{product_item(listProduct_2)}</View>
-          </View>
-        </View>
-      </ScrollView>
-      <View style={styles.container_control_bar}>
-        {nav_bar({
-          text: 'Trang chủ',
-          image: require('./src/assets/product_form/ic_home.png'),
-        })}
-        {nav_bar({
-          text: 'Sản phẩm',
-          image: require('./src/assets/product_form/ic_product_fill.png'),
-        })}
-        <Image
-          style={styles.img_qr}
-          source={require('./src/assets/product_form/img_qr.png')}
-        />
-        {nav_bar({
-          text: 'Thông báo',
-          image: require('./src/assets/product_form/ic_notify.png'),
-        })}
-        {nav_bar({
-          text: 'Tài khoản',
-          image: require('./src/assets/product_form/ic_acc.png'),
-        })}
-      </View>
-    </View>
   );
 };

@@ -8,7 +8,6 @@ target 'hello_world' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
 
   target 'hello_worldTests' do
     inherit! :complete
